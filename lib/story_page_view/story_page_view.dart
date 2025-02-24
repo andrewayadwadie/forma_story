@@ -301,7 +301,6 @@ class StoryPageFrameState extends State<StoryPageFrame>
   @override
   void initState() {
     super.initState();
-
     listener = () {
       if (widget.isCurrentPage) {
         IndicatorAnimationCommand? command =
@@ -314,6 +313,11 @@ class StoryPageFrameState extends State<StoryPageFrame>
           } else if (command.duration != null) {
             animationController.reset();
             animationController.duration = command.duration;
+          } else if (command.next == true) {
+            context.read<StoryStackController>().increment(
+                restartAnimation: () => animationController.forward(from: 0));
+          } else if (command.previous == true) {
+            context.read<StoryStackController>().decrement();
           }
         }
       }
@@ -402,10 +406,14 @@ class IndicatorAnimationCommand {
   final bool? pause;
   final bool? resume;
   final Duration? duration;
+  final bool? next;
+  final bool? previous;
 
   IndicatorAnimationCommand({
     this.pause,
     this.resume,
     this.duration,
+    this.next,
+    this.previous,
   });
 }

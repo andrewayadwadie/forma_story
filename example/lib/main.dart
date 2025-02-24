@@ -226,7 +226,7 @@ class StoryPageState extends State<StoryPage> {
                             child: Text(
                               'Look! The indicator is now paused\n\n'
                               'It will be coutinued after closing the modal bottom sheet.',
-                              style: Theme.of(context).textTheme.headline5,
+                              style: Theme.of(context).textTheme.headlineSmall,
                               textAlign: TextAlign.center,
                             ),
                           ),
